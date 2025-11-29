@@ -75,28 +75,20 @@ cd ..
 
 ---
 
-## **How to Compile**
-
-### **Clean Previous Builds**
-```bash
-make clean
-```
-
-### **Compile the Project**
-```bash
-make
-```
-
-This will create an executable named `page_replacement`.
-
----
-
 ## **How to Run**
 
-### **Option 1: Run with a Single Test File**
-```bash
-./page_replacement test_cases/sample_test.txt
-```
+# Step 1: Clean and compile
+make clean
+make
+
+# Step 2: Make script executable (only needed once)
+chmod +x run_all_tests.sh
+
+# Step 3: Run all tests
+./run_all_tests.sh
+
+# Step 4: Verify results
+wc -l results/all_results.csv  # Should show 181 lines
 
 **Example output:**
 ```
@@ -116,28 +108,6 @@ Page Faults: 5
 Hit Rate: 58.33%
 ...
 ```
-
-### **Option 2: Run with Different Test Files**
-```bash
-./page_replacement test_cases/test_3frames_1.txt
-./page_replacement test_cases/test_10frames_1.txt
-./page_replacement test_cases/test_30frames_1.txt
-```
-
-### **Option 3: Run All Tests Automatically**
-```bash
-chmod +x run_all_tests.sh
-./run_all_tests.sh
-```
-
-This will:
-- Run all 36 test files
-- Execute all 5 algorithms on each test
-- Save results to `results/all_results.csv`
-- Display progress in the terminal
-
-**Note:** This takes about 1-2 minutes to complete all 180 test runs.
-
 ---
 
 ## **Understanding Test Files**
@@ -256,18 +226,5 @@ wc -l results/all_results.csv  # Should show 181 lines
 head -20 results/all_results.csv  # View first 20 results
 ```
 
----
 
-## **Contact Information**
-
-For questions or issues, please contact:
-- **Afifah Khan** - aak0262@my.unt.edu
-
----
-
-## **References**
-- Operating System Concepts, Tenth Edition by Silberschatz, Galvin, and Gagne
-- Course materials from CSCE 5640 - Operating System Design
-
----
 
