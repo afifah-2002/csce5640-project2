@@ -1,0 +1,6 @@
+Algorithm,Frames,PageFaults,HitRate,TestFile
+FIFO,3,9,25.00,test_cases/test_small_frames.txt
+Optimal,3,7,41.67,test_cases/test_small_frames.txt
+LRU,3,10,16.67,test_cases/test_small_frames.txt
+LFU,3,9,25.00,test_cases/test_small_frames.txt
+MFU,3,8,33.33,test_cases/test_small_frames.txt

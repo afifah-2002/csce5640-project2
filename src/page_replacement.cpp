@@ -1,6 +1,7 @@
 #include "page_replacement.h"
 #include <iostream>
 #include <iomanip>
+#include <fstream>
 
 using namespace std;
 
@@ -71,7 +72,8 @@ void PageReplacement::simulate() {
         
         // Check if page is already in frames (page hit)
         if (isPageInFrames(currentPage)) {
-            // Page hit - no fault
+            // Page hit - no fault, but notify algorithm
+            onPageHit(currentPage, i);
             continue;
         }
         
@@ -79,6 +81,31 @@ void PageReplacement::simulate() {
         pageFaults++;
         
         // Call the specific algorithm's replace function
-        replacePage(currentPage);
+        replacePage(currentPage, i);
     }
+
+}
+
+// Save results to a file
+void PageReplacement::saveResults(string filename, string testFile) {
+    ofstream outFile(filename, ios::app);  // append mode
+    
+    if (!outFile.is_open()) {
+        cout << "Error: Could not open output file " << filename << endl;
+        return;
+    }
+    
+    double hitRate = ((double)(referenceString.size() - pageFaults) / referenceString.size()) * 100;
+    
+    // Write in CSV format: Algorithm,Frames,PageFaults,HitRate,TestFile
+    outFile << algorithmName << "," 
+            << numberOfFrames << "," 
+            << pageFaults << "," 
+            << fixed << setprecision(2) << hitRate << ","
+            << testFile << endl;
+    
+    outFile.close();
+    
+    // Debug: confirm write
+    cout << "  -> Saved " << algorithmName << " results" << endl;
 }
